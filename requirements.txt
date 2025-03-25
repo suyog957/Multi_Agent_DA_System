@@ -1,0 +1,17 @@
+torch
+torchvision 
+torchaudio --index-url https://download.pytorch.org/whl/cu121
+transformers 
+pandas 
+matplotlib 
+seaborn 
+fastapi 
+uvicorn
+tensorflow[and-cuda]
+sqlalchemy
+phidata
+groq
+kaggle
+sqlalchemy
+pandasql
+re

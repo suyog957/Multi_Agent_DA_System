@@ -1,0 +1,121 @@
+### AI-Based Data Analysis and Business Insight Generation Process
+
+---
+
+### Overview
+This process automates generating business insights and visualizations from a dataset using AI agents. It involves three agents:
+
+1. **SQL Agent (Data Preparation Agent)**
+2. **Insight Generation Agent (AI Insight Agent)**
+3. **Visualization Agent (AI Visualization Agent)**
+
+Each agent transforms raw data into actionable insights and visualizations.
+
+---
+
+### Components
+
+1. **SQL Agent**: Processes and prepares data by executing SQL queries.
+2. **Insight Generation Agent**: Analyzes the prepared data and generates business insights.
+3. **Visualization Agent**: Creates visualizations (charts/graphs) based on insights.
+
+---
+
+## 1. **SQL Agent (Data Preparation)**
+
+### Purpose
+This agent prepares the data by running SQL queries. It extracts and processes raw data into a structured dataset for analysis.
+
+### Workflow
+1. **Extract data** from database tables.
+2. **Transform data** using SQL queries (joins, filters, aggregations).
+3. **Output**: Structured dataset in a format like `DataFrame`.
+
+---
+
+## 2. **Insight Generation Agent (AI Insight Agent)**
+
+### Purpose
+This agent generates business insights based on the dataset. It uses an AI model (e.g., **GPT-3** or **Llama-3.3**) to answer business questions.
+
+### Workflow
+1. **Input**: Clean dataset (output from SQL Agent).
+2. **Generate dynamic questions** based on the dataset schema.
+3. **Answer business questions**: Derives actionable insights from the data.
+4. **Output**: Question-answer pairs with insights.
+
+---
+
+## 3. **Visualization Agent (AI Visualization Agent)**
+
+### Purpose
+This agent creates high-quality visualizations (e.g., charts and graphs) to display the insights generated in the previous step.
+
+### Workflow
+1. **Input**: Clean dataset and insights.
+2. **Generate visualizations**: Creates bar charts, time-series plots, etc., to represent data.
+3. **Output**: High-quality visualizations like graphs and charts.
+
+---
+
+## Example Process
+
+### Step 1: SQL Agent
+```python
+# SQL Agent generates the following query:
+sql_query = """
+    SELECT p.name, SUM(oi.quantity * oi.unit_price) AS total_sales
+    FROM Products p
+    JOIN Order_Items oi ON p.product_id = oi.product_id
+    GROUP BY p.name
+    ORDER BY total_sales DESC
+"""
+# Output: Clean dataset (DataFrame)
+output_df = execute_sql_on_dataframe(sql_query, table_dict)
+```
+
+### Step 2: Insight Generation Agent
+```python
+# Insight Agent answers business questions:
+insight_agent = InsightAgent(model="llama-3.3-70b-versatile")
+questions = ["What are the top-selling products?", "Which product has the highest sales volume?"]
+insights = insight_agent.run(output_df, questions)
+
+# Example output:
+{
+    "What are the top-selling products?": "Product A has $500,000 in sales.",
+    "Which product has the highest sales volume?": "Product B has sold 10,000 units."
+}
+```
+
+### Step 3: Visualization Agent
+```python
+# Visualization Agent generates a bar chart:
+visualization_agent = VisualizationAgent()
+visualization_agent.generate_bar_chart(output_df, x="product_name", y="total_sales", title="Sales by Product")
+```
+
+---
+
+### Final Output
+- **SQL Agent**: Cleans and prepares the data.
+- **Insight Agent**: Generates clear business insights based on questions.
+- **Visualization Agent**: Creates high-quality visualizations to represent insights.
+
+---
+
+### Key Features:
+1. **Automation**: Automates the entire process, reducing manual work.
+2. **Actionable Insights**: Provides insights directly usable for decision-making.
+3. **High-Quality Visualizations**: Enables better understanding of data trends.
+4. **Dynamic Questions**: Generates relevant business questions based on the data.
+
+---
+
+### Future Enhancements:
+1. **Custom Visualizations**: Users can specify preferred chart types.
+2. **Interactive Dashboards**: Allow users to explore data interactively.
+3. **Predictive Analytics**: Integrate machine learning for forecasting.
+4. **Role-based Insights**: Tailor insights to different business roles (e.g., marketing, sales).
+
+This framework enables businesses to automatically process data, gain insights, and visualize them in a way that supports quick, data-driven decisions.
